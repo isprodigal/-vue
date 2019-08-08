@@ -14,9 +14,9 @@ export default new Router({
       component: Login
     },
     {
-      path: '/Tables',
-      name: 'Tables',
-      component: () => import('./views/Tables.vue')
+      path: '/Home',
+      name: 'home',
+      component: () => import('./views/Home.vue')
     }
   ]
 })
