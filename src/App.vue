@@ -25,4 +25,16 @@ export default {
 .mar {
   margin: 0 20%;
 }
+#app {
+  width: 100%;
+  height: 100%;
+  background-color: #f0f2f5;
+  position: fixed;
+}
+.main {
+  margin-left: 220px;
+  margin-right: 20px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
 </style>

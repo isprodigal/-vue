@@ -1,62 +1,86 @@
 <template>
   <div class="navMenu">
     <el-menu
-      default-active="1"
+      :default-active="onRoutes"
       class="el-menu-vertical-demo"
       background-color="#002140"
       text-color="#fff"
       @open="handleOpen"
       @close="handleClose"
       :collapse="isCollapse"
+      unique-opened
+      router
     >
-      <el-menu-item index="1">
-        <i class="el-icon-menu"></i>
-        <span slot="title">首页</span>
-      </el-menu-item>
-      <el-submenu index="2">
-        <template slot="title">
-          <i class="el-icon-location"></i>
-          <span slot="title">导航一</span>
+      <template v-for="item in nav">
+        <template v-if="item.childs">
+          <el-submenu :index="item.entity.id" :key="item.entity.id">
+            <template slot="title">
+              <i :class="['iconfont','fontSize',item.entity.icon ]"></i>
+              <span slot="title" class="listtitle">{{ item.entity.alias }}</span>
+            </template>
+            <template v-for="subItem in item.childs">
+              <el-submenu v-if="subItem.childs" :index="subItem.entity.id" :key="subItem.entity.id">
+                <template slot="title">
+                  <i :class="['iconfont','fontSize',subItem.entity.icon]"></i>
+                  <span slot="title" class="listtitle">{{ subItem.entity.alias }}</span>
+                </template>
+                <el-menu-item
+                  v-for="(threeItem,i) in subItem.childs"
+                  :key="i"
+                  :index="threeItem.entity.id"
+                >
+                  <template slot="title">
+                    <i :class="['iconfont','fontSize',subItem.entity.icon]"></i>
+                    <span slot="title" class="listtitle">{{ subItem.entity.alias }}</span>
+                  </template>
+                  <!-- {{ threeItem.entity.alias }} -->
+                </el-menu-item>
+              </el-submenu>
+              <el-menu-item v-else :index="subItem.entity.value" :key="subItem.entity.id">
+                <template slot="title">
+                  <i :class="['iconfont','fontSize',subItem.entity.icon]"></i>
+                  <span slot="title" class="listtitle">{{ subItem.entity.alias }}</span>
+                </template>
+                <!-- {{ subItem.entity.alias }} -->
+              </el-menu-item>
+            </template>
+          </el-submenu>
         </template>
-        <el-menu-item-group>
-          <el-menu-item index="2-1">选项1</el-menu-item>
-          <el-menu-item index="2-2">选项2</el-menu-item>
-          <el-menu-item index="2-3">选项3</el-menu-item>
-        </el-menu-item-group>
-        <el-submenu index="2-4">
-          <span slot="title">选项4</span>
-          <el-menu-item index="2-4-1">选项1</el-menu-item>
-        </el-submenu>
-      </el-submenu>
-      <el-menu-item index="3">
-        <i class="el-icon-setting"></i>
-        <span slot="title">导航三</span>
-      </el-menu-item>
+        <el-menu-item v-else :index="item.entity.value" :key="item.entity.id">
+          <template slot="title">
+            <i :class="['iconfont','fontSize',item.entity.icon]"></i>
+            <span slot="title" class="listtitle">{{ item.entity.alias }}</span>
+          </template>
+        </el-menu-item>
+      </template>
     </el-menu>
   </div>
+
 </template>
 <script>
-
 export default {
   name: 'navMenu',
   data () {
     return {
       isCollapse: false,
-      ssr: false
+      ssr: false,
+      nav: [],
+      onRoutes: '/home'
     }
   },
   created () {
     this.axios.get('/qwe.json').then(res => {
-      console.log(res)
+      this.nav = res.data
+      this.onRoutes = this.$route.path
     })
   },
   methods: {
-    // handleOpen (key, keyPath) {
-    //   console.log(key, keyPath)
-    // },
-    // handleClose (key, keyPath) {
-    //   console.log(key, keyPath)
-    // }
+    handleOpen (key, keyPath) {
+      console.log(key, keyPath)
+    },
+    handleClose (key, keyPath) {
+      console.log(key, keyPath)
+    }
   }
 }
 </script>
@@ -69,6 +93,9 @@ export default {
   .el-menu-vertical-demo {
     width: 200px;
     height: 100%;
+  }
+  i {
+    margin-right: 10px;
   }
 }
 </style>
