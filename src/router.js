@@ -3,12 +3,12 @@ import Router from 'vue-router'
 import Login from './views/Login.vue'
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
+      path: '/Login',
       name: 'Login',
       component: Login
     },
@@ -33,9 +33,9 @@ export default new Router({
           component: () => import('./views/role.vue')
         },
         {
-          path: '/views/menu',
+          path: '/views/menuManage',
           name: '菜单管理',
-          component: () => import('./views/menu.vue')
+          component: () => import('./views/menuManage.vue')
         },
         {
           path: '/views/group',
@@ -46,3 +46,14 @@ export default new Router({
     }
   ]
 })
+// 路由守卫
+router.beforeEach((to, from, next) => {
+  const isLogin = !!localStorage.elementUI
+  if (to.path === '/Login') {
+    next()
+  } else {
+    // 是否在登录状态下
+    isLogin ? next() : next('/Login')
+  }
+})
+export default router

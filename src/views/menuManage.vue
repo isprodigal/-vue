@@ -1,5 +1,5 @@
 <template>
-  <div class="menu">
+  <div class="menuManage">
     <div class="main">
       <el-card class="box-card">
         菜单管理
@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: 'menu'
+  name: 'menuManage'
 }
 </script>
 <style lang="less">

@@ -17,7 +17,7 @@
             <el-input type="password" v-model="ruleForm2.password" placeholder="请输入密码"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-checkbox v-model="checked">自动登陆</el-checkbox>
+            <el-checkbox v-model="ruleForm2.checked">自动登陆</el-checkbox>
             <router-link style="float:right;color:#1890ff;text-decoration:none;" to>忘记密码</router-link>
           </el-form-item>
           <el-form-item>
@@ -53,10 +53,10 @@ export default {
       }
     }
     return {
-      checked: true,
       ruleForm2: {
         name: '',
-        password: ''
+        password: '',
+        checked: true
       },
       rules2: {
         name: [{ validator: validateName, trigger: 'blur' }],
@@ -64,11 +64,27 @@ export default {
       }
     }
   },
+  created () {
+    if (localStorage.elementUI) {
+      let storage = JSON.parse(localStorage.elementUI)
+      if (storage.checked) {
+        this.submitForm(storage)
+      }
+    }
+  },
   methods: {
-    submitForm () {
-      this.ruleForm2.name === 'admin' && this.ruleForm2.password === '123456'
-        ? this.$router.replace('/Home')
-        : this.$message.error('登陆失败,账号密码错误,请检查账号密码')
+    submitForm (val) {
+      // console.log(val)
+      if (val.name === 'admin' && val.password === '123456') {
+        this.$router.replace('/home')
+      } else if (val.checked === true) {
+        this.$message.error('自动登陆验证失败,请重新登陆')
+      } else {
+        localStorage.setItem('elementUI', JSON.stringify(this.ruleForm2))
+        this.ruleForm2.name === 'admin' && this.ruleForm2.password === '123456'
+          ? this.$router.replace('/home')
+          : this.$message.error('登陆失败,账号密码错误,请检查账号密码')
+      }
     }
   }
 }

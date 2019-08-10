@@ -70,7 +70,7 @@
                     "alias": "菜单管理",
                     "state": "ENABLE",
                     "sort": 2,
-                    "value": "/views/menu",
+                    "value": "/views/menuManage",
                     "type": "LINK",
                     "discription": "用于菜单管理的菜单",
                     "createUserId": 1
