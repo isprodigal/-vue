@@ -8,6 +8,10 @@ const router = new Router({
   base: process.env.BASE_URL,
   routes: [
     {
+      path: '/',
+      redirect: '/Login'
+    },
+    {
       path: '/Login',
       name: 'Login',
       component: Login
@@ -41,6 +45,11 @@ const router = new Router({
           path: '/views/group',
           name: '分组管理',
           component: () => import('./views/group.vue')
+        },
+        {
+          path: '/account/Personal',
+          name: '我的信息',
+          component: () => import('./account/Personal')
         }
       ]
     }

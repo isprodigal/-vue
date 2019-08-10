@@ -1,6 +1,7 @@
 <template>
   <div class="Tables">
     <div class="mar">
+      <el-main>
       <el-collapse v-model="activeName" accordion>
         <!-- table多选模式 -->
         <el-collapse-item title="table多选模式" name="1">
@@ -73,9 +74,10 @@
           <div class="bt">table单选模式</div>
         </el-collapse-item>
       </el-collapse>
+      </el-main>
     </div>
     <!-- 弹出层 -->
-    <el-dialog :title="titles" :visible.sync="dialogVisible" width="30%">
+    <el-dialog :title="titles" :visible.sync="dialogVisible" width="30%" :modal-append-to-body='false'>
       <el-form
         :model="ruleForm2"
         status-icon

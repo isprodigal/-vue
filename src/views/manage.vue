@@ -1,8 +1,12 @@
 <template>
   <div class="manage">
-    <headTop></headTop>
-    <navMenu></navMenu>
-    <router-view></router-view>
+    <el-container style="height: 100%;">
+      <navMenu></navMenu>
+      <div style="height:100%;width:100%">
+        <headTop></headTop>
+        <router-view></router-view>
+      </div>
+    </el-container>
   </div>
 </template>
 
@@ -19,5 +23,8 @@ export default {
 }
 </script>
 <style lang="less">
-
+.manage {
+  width: 100%;
+  height: 100%;
+}
 </style>

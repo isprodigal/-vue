@@ -241,5 +241,38 @@
                 "childs": null
             }
         ]
+    },
+    {
+        "entity": {
+            "id": "16",
+            "parentMenuId": 0,
+            "name": "contentManage",
+            "icon": "el-icon-user-solid",
+            "alias": "账号管理",
+            "state": "ENABLE",
+            "sort": 2,
+            "value": null,
+            "type": "NONE",
+            "discription": "用于账号管理的菜单",
+            "createUserId": 1
+        },
+        "childs": [
+            {
+                "entity": {
+                    "id": "11",
+                    "parentMenuId": 9,
+                    "name": "classifyManage",
+                    "icon": "el-icon-user",
+                    "alias": "我的信息",
+                    "state": "ENABLE",
+                    "sort": 0,
+                    "value": "/account/Personal",
+                    "type": "LINK",
+                    "discription": "展示个人信息",
+                    "createUserId": 1
+                },
+                "childs": null
+            }
+        ]
     }
 ]

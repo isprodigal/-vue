@@ -86,12 +86,13 @@ export default {
 </script>
 <style lang="less" scoped>
 .navMenu {
-  position: absolute;
-  left: 0;
-  top: 0;
+  float: left;
   height: 100%;
+  width: 20%;
+  min-width: 160px;
+  max-width: 210px;
+  overflow: hidden;
   .el-menu-vertical-demo {
-    width: 200px;
     height: 100%;
   }
   i {
